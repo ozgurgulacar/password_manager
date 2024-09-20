@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/Model/User.dart';
 
 
 import '../Thema/Themas.dart';
@@ -94,8 +95,14 @@ class _homePageState extends Homepageviewmodel {
                       showModalBottomSheet(
                         context: context,
                         builder: (context) {
+                          bool resultKayit =  Homepageviewmodel().userKaydet(textFirst: controllerFirst);
+                          if(resultKayit){
                           return Themas().bottomSheetContainer(
                               context: context, text: successLoginMessage);
+                          }else{
+                            return Themas().bottomSheetContainer(
+                                context: context, text: errorLoginMessage);
+                          }
                         },
                         backgroundColor: Colors.indigoAccent,
                       );
@@ -114,6 +121,9 @@ class _homePageState extends Homepageviewmodel {
     );
   }
 }
+
+
+
 
 class _PageStyle {
   TextStyle inputTextStyle() {

@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
+import 'package:password_manager/Model/SingletonDB.dart';
+
+import '../Model/User.dart';
 import '../View/homePage.dart';
 
 
@@ -8,6 +11,44 @@ class Homepageviewmodel extends State<homePage> {
   Widget build(BuildContext context) {
     throw UnimplementedError();
   }
+
+  @override
+  void initState() {
+    super.initState();
+    dbCreate();
+  }
+
+
+  late final db;
+
+
+
+  void dbCreate() {
+    db=SingletonDB.getInstance();
+
+  }
+
+
+
+
+
+  bool userKaydet({required TextEditingController textFirst}) {
+    if(SingletonDB.getInstance()==null){
+      db=SingletonDB.getInstance();
+      return false;
+    }else{
+      User user=User(password: textFirst.text, isActive: true);
+      SingletonDB.getInstance()!.dao.insertUser(user);
+      //NAVİGATE İŞLEMİ YAPILACAK
+      return true;
+    }
+  }
+
+
+
+
+
+
 
   final String appBarTitle = "Şifrenizi Oluşturun";
   final String inputTextMessage = "Şifre Girin";
