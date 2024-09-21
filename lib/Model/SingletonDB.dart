@@ -2,25 +2,24 @@ import '../Database/Database.dart';
 
 class SingletonDB {
 
-  static SingletonDB? _instance;
-  static AppDatabase? _database;
+  static  AppDatabase? _database;
 
   SingletonDB._(){
+    print("ÇALIIIŞ");
     _getDB();
   }// Private constructor
 
   static AppDatabase? getInstance() {
-    _instance ??= SingletonDB._();
+    if(_database==null){
+      SingletonDB._();
+    }
     return _database;
   }
 
 
 
   void _getDB() async {
-    await $FloorAppDatabase.databaseBuilder('app_database.db').build().then((value) {
-    _database=value;
-    return _database!;
-    },);
+    _database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
   }
 
 

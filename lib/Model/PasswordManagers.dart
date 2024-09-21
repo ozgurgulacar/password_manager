@@ -7,10 +7,10 @@ class PasswordManagers {
   final String password;
 
   @primaryKey
-  final int id;
+  final int? id;
 
   PasswordManagers(
-      {required this.name, required this.password, required this.id});
+      {required this.name, required this.password, this.id});
 
 
 }

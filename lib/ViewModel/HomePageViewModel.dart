@@ -19,6 +19,15 @@ class Homepageviewmodel extends State<homePage> {
   }
 
 
+  final String appBarTitle = "Şifrenizi Oluşturun";
+  final String inputTextMessage = "Şifre Girin";
+  final String buttonText = "KAYDOL";
+  final String errorLoginMessage="Hatalı Giriş Yaptınız";
+  final String successLoginMessage="Giriş Başarılı";
+
+  TextEditingController controllerFirst = TextEditingController();
+  TextEditingController controllerSecond = TextEditingController();
+
   late final db;
 
 
@@ -27,10 +36,6 @@ class Homepageviewmodel extends State<homePage> {
     db=SingletonDB.getInstance();
 
   }
-
-
-
-
 
   bool userKaydet({required TextEditingController textFirst}) {
     if(SingletonDB.getInstance()==null){
@@ -44,20 +49,6 @@ class Homepageviewmodel extends State<homePage> {
     }
   }
 
-
-
-
-
-
-
-  final String appBarTitle = "Şifrenizi Oluşturun";
-  final String inputTextMessage = "Şifre Girin";
-  final String buttonText = "KAYDOL";
-  final String errorLoginMessage="Hatalı Giriş Yaptınız";
-  final String successLoginMessage="Giriş Başarılı";
-
-  TextEditingController controllerFirst = TextEditingController();
-  TextEditingController controllerSecond = TextEditingController();
 
   bool clickButton(
       {required TextEditingController textFirst,

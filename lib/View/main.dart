@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/View/TabBarPage.dart';
 
 import 'homePage.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: homePage(),
+      home: TabBarPage(),
     );
   }
 }
@@ -52,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // the App.build method, and use it to set our appbar title.
 
         ),
-        body: homePage()
+        body: TabBarPage()
       /*
       Center(
         // Center is a layout widget. It takes a single child and positions it
