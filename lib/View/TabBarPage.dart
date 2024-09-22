@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/View/AddPasswordPage.dart';
 import 'package:password_manager/View/AllPasswordPage.dart';
 import 'package:password_manager/View/homePage.dart';
 
@@ -19,19 +20,19 @@ class _AllPasswordPageState extends State<TabBarPage> {
         appBar: AppBar(
           backgroundColor: Colors.cyan,
           centerTitle: true,
-          title: const Text("appBarTitle"),
+          title: const Text("PASSWORD MANAGER"),
         ),
         bottomNavigationBar: const TabBar(
           dividerColor: Colors.red,
           labelColor: Colors.amber,
           tabs: [
-            Tab(icon: Icon(Icons.directions_car),text: "TEXT1",),
-            Tab(icon: Icon(Icons.directions_subway),text: "TEXT2"),
+            Tab(icon: Icon(Icons.list_alt_outlined),text: "TÜM ŞİFRELER",),
+            Tab(icon: Icon(Icons.add_box_outlined),text: "YENİ EKLE"),
           ],
         ),
         body: const TabBarView(children: [
           Allpasswordpage(),
-          Placeholder(color: Colors.black,),
+          addPasswordPage(),
         ]),
       ),
     );

@@ -5,7 +5,6 @@ class SingletonDB {
   static  AppDatabase? _database;
 
   SingletonDB._(){
-    print("ÇALIIIŞ");
     _getDB();
   }// Private constructor
 

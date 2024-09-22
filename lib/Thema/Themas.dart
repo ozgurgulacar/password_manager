@@ -32,4 +32,15 @@ class Themas {
       ),
     );
   }
+
+
+  TextStyle inputTextStyle() {
+    return const TextStyle(
+      color: Colors.black87,
+      fontWeight: FontWeight.w900,
+      fontStyle: FontStyle.italic,
+      letterSpacing: 3,
+    );
+  }
+
 }

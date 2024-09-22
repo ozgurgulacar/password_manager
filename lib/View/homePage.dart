@@ -60,7 +60,7 @@ class _homePageState extends Homepageviewmodel {
                     obscureText: true,
                     controller: controllerFirst,
                     keyboardType: TextInputType.text,
-                    style: _PageStyle().inputTextStyle(),
+                    style: Themas().inputTextStyle(),
                     decoration: Themas().inputDecoration(
                         labelText: inputTextMessage,
                         icon: Icon(Icons.password))),
@@ -70,7 +70,7 @@ class _homePageState extends Homepageviewmodel {
                   obscureText: true,
                   controller: controllerSecond,
                   keyboardType: TextInputType.text,
-                  style: _PageStyle().inputTextStyle(),
+                  style: Themas().inputTextStyle(),
                   decoration: Themas().inputDecoration(
                       labelText: inputTextMessage,
                       icon: Icon(Icons.password_outlined))),
@@ -126,14 +126,6 @@ class _homePageState extends Homepageviewmodel {
 
 
 class _PageStyle {
-  TextStyle inputTextStyle() {
-    return const TextStyle(
-      color: Colors.black87,
-      fontWeight: FontWeight.w900,
-      fontStyle: FontStyle.italic,
-      letterSpacing: 3,
-    );
-  }
 
   BoxDecoration containerDecoration({required List<Color> colors}) {
     return BoxDecoration(
