@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/Model/SingletonDB.dart';
 import 'package:password_manager/View/TabBarPage.dart';
 
+import 'PasswordDetail.dart';
 import 'homePage.dart';
-
 
 void main() {
   runApp(const MyApp());
@@ -14,71 +15,56 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: TabBarPage(),
+      routes: {
+        "/": (context) => _SplashScreen(),
+        "/HomePage": (context) => homePage(),
+        "/TabBarPage": (context) => TabBarPage(),
+        "/PasswordDetailPage": (context) => PasswordDetail(),
+      },
     );
   }
+
+
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-
-  final String title;
+// İlk sayfa widget'ı
+class _SplashScreen extends StatefulWidget {
+  const _SplashScreen({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HomePageState extends State<_SplashScreen> {
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+
+  @override
+  void initState() {
+    super.initState();
+    _routePage();
   }
+
+
+  Future<void> _routePage() async {
+    final db = await SingletonDB.getInstance();
+    if (db == null) {
+      await Future.delayed(Duration(seconds: 2));
+    }
+    final user = await SingletonDB.getInstance()!.dao.getUser();
+    if (user.isEmpty) {
+      Navigator.pushReplacementNamed(context, "/HomePage");
+    } else {
+      Navigator.pushReplacementNamed(context, "/TabBarPage");
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    return Scaffold();
 
-    return Scaffold(
-        appBar: AppBar(
-          // TRY THIS: Try changing the color here to a specific color (to
-          // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-          // change color while the other colors stay the same.
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-
-        ),
-        body: TabBarPage()
-      /*
-      Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-       // This trailing comma makes auto-formatting nicer for build methods.
-       */
-    );
   }
 }

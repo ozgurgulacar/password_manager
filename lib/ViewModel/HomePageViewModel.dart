@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:password_manager/Model/SingletonDB.dart';
+import 'package:password_manager/View/TabBarPage.dart';
 
 import '../Model/User.dart';
 import '../View/homePage.dart';
@@ -16,6 +17,7 @@ class Homepageviewmodel extends State<homePage> {
   void initState() {
     super.initState();
     dbCreate();
+    checkUser();
   }
 
 
@@ -34,7 +36,19 @@ class Homepageviewmodel extends State<homePage> {
 
   void dbCreate() {
     db=SingletonDB.getInstance();
+  }
 
+  Future<void> checkUser() async {
+    if(db==null){
+      await Future.delayed(Duration(seconds: 2));
+    }else{
+      final user = SingletonDB.getInstance()!.dao.getUser();
+      user.then((value) {
+        if(value.isNotEmpty){
+          Navigator.pushReplacementNamed(context, "/TabBarPage");
+        }
+      },);
+    }
   }
 
   bool userKaydet({required TextEditingController textFirst}) {
@@ -44,7 +58,7 @@ class Homepageviewmodel extends State<homePage> {
     }else{
       User user=User(password: textFirst.text, isActive: true);
       SingletonDB.getInstance()!.dao.insertUser(user);
-      //NAVİGATE İŞLEMİ YAPILACAK
+      Navigator.pushReplacementNamed(context, "/TabBarPage");
       return true;
     }
   }

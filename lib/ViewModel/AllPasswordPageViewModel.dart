@@ -49,16 +49,25 @@ class Allpasswordpageviewmodel extends State<Allpasswordpage> {
         });
       }
     }
-
   }
 
+  Future<bool> listTileOnTap({required String name, required BuildContext cnt}) async {
+    final value = await SingletonDB.getInstance()!.dao.getUser();
 
-  void listTileOnTap() {
-    if(controller.text==userPassword){
-      //Detay Sayfasına Gidilecek
-    }else{
-      //Yanlış şifre Girildi Mesajı verilecek
+    if (value.last != null) {
+      userPassword = value.last!.password;
+      if (controller.text == userPassword) {
+        //Detay Sayfasına Gidilecek
+        Navigator.pop(cnt);
+        return true;
+
+      } else {
+        //Yanlış şifre Girildi Mesajı verilecek
+        Navigator.pop(cnt);
+      }
     }
+
+    return false;
   }
 
   void alertDialogCancel(BuildContext cnt) {

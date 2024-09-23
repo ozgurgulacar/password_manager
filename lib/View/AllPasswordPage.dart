@@ -48,7 +48,7 @@ class _AllpasswordpageState extends Allpasswordpageviewmodel {
                       context: context,
                       builder: (BuildContext context) {
                         return _PageStyle()
-                            .alertDialog(title: title, hintText: hintText,context: context);
+                            .alertDialog(title: title, hintText: hintText,context: context,name: list[index].name);
                       },
                     );
                   },
@@ -82,7 +82,7 @@ class _PageStyle extends Allpasswordpageviewmodel {
     );
   }
 
-  AlertDialog alertDialog({required String title, required String hintText,required BuildContext context}) {
+  AlertDialog alertDialog({required String title, required String hintText,required BuildContext context,required String name}) {
     return AlertDialog(
       title: Text(title),
       content: TextFormField(
@@ -97,8 +97,11 @@ class _PageStyle extends Allpasswordpageviewmodel {
           child: Text('İptal'),
         ),
         TextButton(
-          onPressed: () {
-            listTileOnTap();
+          onPressed: () async {
+            final result = listTileOnTap(name: name,cnt: context);
+            if(await result){
+              Navigator.pushNamed(context, "/PasswordDetailPage", arguments: name = name);
+            }
           },
           child: Text('Onayla'),
         ),
