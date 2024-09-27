@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:password_manager/Model/Crypto.dart';
 import 'package:password_manager/Model/SingletonDB.dart';
 import 'package:password_manager/View/TabBarPage.dart';
 
@@ -31,7 +32,7 @@ class Homepageviewmodel extends State<homePage> {
   TextEditingController controllerSecond = TextEditingController();
 
   late final db;
-
+  final crypto=Crypto();
 
 
   void dbCreate() {
@@ -56,7 +57,7 @@ class Homepageviewmodel extends State<homePage> {
       db=SingletonDB.getInstance();
       return false;
     }else{
-      User user=User(password: textFirst.text, isActive: true);
+      User user=User(password: crypto.encryptText(textFirst.text), isActive: true);
       SingletonDB.getInstance()!.dao.insertUser(user);
       Navigator.pushReplacementNamed(context, "/TabBarPage");
       return true;

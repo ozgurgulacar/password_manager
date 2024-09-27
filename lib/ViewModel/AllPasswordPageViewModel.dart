@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:password_manager/Database/Database.dart';
+import 'package:password_manager/Model/Crypto.dart';
 import 'package:password_manager/Model/SingletonDB.dart';
 
 import '../Model/PasswordManagers.dart';
@@ -19,6 +20,7 @@ class Allpasswordpageviewmodel extends State<Allpasswordpage> {
 
   List<PasswordManagers> list = [];
   late AppDatabase? db;
+  final crypto=Crypto();
   late String userPassword;
   TextEditingController controller = TextEditingController();
 
@@ -37,7 +39,7 @@ class Allpasswordpageviewmodel extends State<Allpasswordpage> {
     final value = await db!.dao.getUser();
 
     if (value.last != null) {
-      userPassword = value.last!.password;
+      userPassword = crypto.decryptText(value.last!.password);
     }
 
     final value2 = await db!.dao.getAllPassword();
@@ -55,7 +57,7 @@ class Allpasswordpageviewmodel extends State<Allpasswordpage> {
     final value = await SingletonDB.getInstance()!.dao.getUser();
 
     if (value.last != null) {
-      userPassword = value.last!.password;
+      userPassword = crypto.decryptText(value.last!.password);
       if (controller.text == userPassword) {
         //Detay Sayfasına Gidilecek
         Navigator.pop(cnt);

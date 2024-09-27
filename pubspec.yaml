@@ -20,6 +20,9 @@ dependencies:
   #for sql
   floor: ^1.5.0
 
+  #Şifreleme
+  encrypt: ^5.0.3
+
 
 
 

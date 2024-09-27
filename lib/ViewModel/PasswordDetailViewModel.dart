@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_manager/Model/Crypto.dart';
 import 'package:password_manager/Model/PasswordManagers.dart';
 import 'package:password_manager/Model/SingletonDB.dart';
 
@@ -23,6 +24,7 @@ class PasswordDetailViewModel extends State<PasswordDetail>{
 
   }
 
+  final crypto=Crypto();
   late  Object? name;
   final textName = TextEditingController();
   final textPassword = TextEditingController();
@@ -44,7 +46,7 @@ class PasswordDetailViewModel extends State<PasswordDetail>{
     }else{
       password.first.then((value) {
         textName.text=value!.name;
-        textPassword.text=value.password;
+        textPassword.text=crypto.decryptText(value.password);
         parola=value;
       },);
     }
